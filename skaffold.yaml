@@ -1,0 +1,72 @@
+# Copyright (C) 2021 - present Juergen Zimmermann, Hochschule Karlsruhe
+#
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <https://www.gnu.org/licenses/>.
+
+# Aufruf:   i.a. bereits eingestellt:   $env:SKAFFOLD_PROFILE = 'dev'
+#                                       $env:TAG = '2023.10.1-buildpacks'
+#           skaffold dev
+#           skaffold delete
+#           docker tag jensmartin/mannschaft:2023.10.1 jensmartin/mannschaft:latest
+
+# https://skaffold.dev/docs/references/yaml
+# https://skaffold-latest.firebaseapp.com/docs/references/yaml
+
+# https://github.com/GoogleContainerTools/skaffold/tree/master/docs/content/en/schemas
+apiVersion: skaffold/v4beta8
+kind: Config
+metadata:
+  name: mannschaft
+# https://skaffold.dev/docs/pipeline-stages/builders
+build:
+  artifacts:
+    - image: jensmartin/mannschaft
+      # https://skaffold.dev/docs/pipeline-stages/builders/buildpacks
+      # https://paketo.io/docs/howto/java
+      # https://www.youtube.com/watch?v=aI19ZYV4-7o
+      buildpacks:
+        builder: paketobuildpacks/builder:base
+        env: [BP_JVM_VERSION=21.*]
+        dependencies:
+          paths: [src, build.gradle.kts]
+  # https://skaffold.dev/docs/pipeline-stages/taggers
+  tagPolicy:
+    envTemplate:
+      template: "{{.TAG}}"
+deploy:
+  # https://skaffold.dev/docs/pipeline-stages/deployers/helm
+  # Alternativen: Kustomize, kpt, kubectl
+  helm:
+    releases:
+      - name: mannschaft
+        chartPath: extras/kubernetes/mannschaft
+        valuesFiles: [extras/mannschaft/kubernetes/values.yaml]
+        namespace: acme
+profiles:
+  - name: dev
+    activation:
+      - env: SKAFFOLD_PROFILE=dev
+    deploy:
+      helm:
+        releases:
+          - name: mannschaft
+            chartPath: extras/kubernetes/mannschaft
+            valuesFiles: [extras/kubernetes/mannschaft/values.yaml, extras/kubernetes/mannschaft/dev.yaml]
+            #valuesFiles: [extras/kubernetes/mannschaft/values.yaml, extras/mannschaft/dev.yaml, extras/kubernetes/mannschaft/dev-mysql.yaml]
+            #valuesFiles: [extras/kubernetes/mannschaft/values.yaml, extras/mannschaft/dev.yaml, extras/kubernetes/mannschaft/dev-h2.yaml]
+            namespace: acme
+    # https://skaffold.dev/docs/pipeline-stages/port-forwarding
+    portForward:
+      - resourceType: service
+        resourceName: mannschaft
+        port: http-svc

@@ -1,0 +1,69 @@
+{
+	"info": {
+		"name": "Dev",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "DB neu laden",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test('Statuscode 200', () => {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"pm.test('Content-Type text/plain', () => {\r",
+							"    const { response } = pm;\r",
+							"    const contentType = response.headers.get('Content-Type');\r",
+							"    pm.expect(contentType).to.match(/^text\\/plain/u);\r",
+							"});\r",
+							"pm.test('ok', () => {\r",
+							"    const body = pm.response.text();\r",
+							"    pm.expect(body).to.be.equal('ok');\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "username",
+							"value": "admin",
+							"type": "string"
+						},
+						{
+							"key": "password",
+							"value": "p",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "text/plain",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{base_url}}/dev/db_populate",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"dev",
+						"db_populate"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

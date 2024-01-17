@@ -1,0 +1,62 @@
+schema {
+  query: Query
+  mutation: Mutation
+}
+
+"Suche nach Mannschaften"
+type Query {
+  "Suche Mannschaft mit der ID"
+  mannschaft(id: ID!):Mannschaft
+
+  "Suche Mannschaften anhand von Name oder Gründungsjahr"
+  mannschaften (input: Suchkriterien): [Mannschaft!]
+}
+
+type Mutation{
+  "Eine neue Mannschaft anlegen"
+  create(input: MannschaftInput!): CreatePayload
+}
+
+type Mannschaft{
+  id: ID
+  name: String!
+  gruendungsjahr: String
+  trainer: Trainer!
+  spielerList: [Spieler!]
+}
+
+type Spieler{
+  vorname: String!
+  nachname: String!
+}
+
+type Trainer{
+  vorname: String!
+  nachname: String!
+}
+
+input Suchkriterien{
+  name: String
+  gruendungsjahr: String
+}
+
+input MannschaftInput{
+  name:String!
+  gruendungsjahr: String
+  trainer: TrainerInput!
+  spielerList: [SpielerInput!]
+}
+
+input SpielerInput{
+  vorname: String!
+  nachname: String!
+}
+
+input TrainerInput{
+  vorname: String!
+  nachname: String!
+}
+
+type CreatePayload{
+  id: String!
+}

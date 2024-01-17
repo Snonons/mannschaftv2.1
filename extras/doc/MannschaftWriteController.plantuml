@@ -1,0 +1,143 @@
+' Copyright (C) 2019 - present Juergen Zimmermann, Hochschule Karlsruhe
+'
+' This program is free software: you can redistribute it and/or modify
+' it under the terms of the GNU General Public License as published by
+' the Free Software Foundation, either version 3 of the License, or
+' (at your option) any later version.
+'
+' This program is distributed in the hope that it will be useful,
+' but WITHOUT ANY WARRANTY; without even the implied warranty of
+' MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+' GNU General Public License for more details.
+'
+' You should have received a copy of the GNU General Public License
+' along with this program.  If not, see <https://www.gnu.org/licenses/>.
+@startuml MannschaftHandler
+
+skinparam classAttributeIconSize 0
+
+package jakarta.servlet.http {
+    class HttpServletRequest
+}
+
+package org.springframework {
+    package stereotype {
+        interface "@Controller" as Controller
+    }
+
+    package web.bind.annotation {
+        interface "@RequestMapping" as RequestMapping
+        interface "@PathVariable" as PathVariable
+        interface "@RequestBody" as RequestBody
+        interface "@ExceptionHandler" as ExceptionHandler
+
+        RequestBody .left[hidden].> Controller
+        ExceptionHandler .left[hidden].> Controller
+    }
+
+    package http {
+        class ResponseEntity<T>
+        class ProblemDetail
+
+        package converter {
+            class HttpMessageNotReadableException
+        }
+
+        ResponseEntity .[hidden].> ProblemDetail
+        ResponseEntity .left[hidden].> Controller
+        ProblemDetail .[hidden].> HttpMessageNotReadableException
+    }
+
+    package security.core {
+        class Authentication
+
+        ProblemDetail .right[hidden].> Authentication
+    }
+}
+
+package java.util {
+    interface Collection<T>
+    class UUID
+    class Optional<T>
+
+    Collection .[hidden].> Optional
+    Optional .[hidden].> UUID
+    HttpServletRequest .up[hidden].> UUID
+}
+
+package com.acme.mannschaft {
+    package service {
+        class MannschaftWriteService << control >> << @Service >>
+
+        class ConstraintViolationsException
+        class EmailExistsException
+        class VersionOutdatedException
+    }
+
+    package security {
+        class UsernameExistsException
+        class PasswordInvalidException
+    }
+
+    package rest #DDDDDD {
+        package patch #FFFFFF {
+            class PatchOperation <<entity>>
+        }
+
+        class MannschaftDTO <<entity>>
+        class CustomUserDTO <<entity>>
+        class MannschaftUserDTO <<entity>>
+        MannschaftUserDTO o--> MannschaftDTO
+        MannschaftUserDTO o--> CustomUserDTO
+        MannschaftDTO .[hidden].> UUID
+        MannschaftDTO .[hidden].> MannschaftWriteService
+
+        class VersionInvalidException
+
+        class MannschaftWriteController << boundary >> << @Controller >> << @RequestMapping >> {
+            + @PostMapping post(@RequestBody mannschaftUserDTO: MannschaftUserDTO, request: HttpServletRequest): ResponseEntity<ProblemDetail>
+            + @PutMapping put(@PathVariable id: UUID, @RequestBody mannschaftDTO: MannschaftDTO, @RequestHeader("If-Match") version: Optional<String>, request: HttpServletRequest): ResponseEntity<Void>
+            + @PatchMapping patch(@PathVariable id: UUID, @RequestBody patchOps: Collection<PatchOperation>, @RequestHeader("If-Match") version: Optional<String>, authentication: Authentication, request: HttpServletRequest): ResponseEntity<Void>
+            + @DeleteMapping deleteById(@PathVariable id: UUID)
+            + @ExceptionHandler onConstraintViolations(ex: ConstraintViolationsException, req: HttpServletRequest): ResponseEntity<ProblemDetail>
+            + @ExceptionHandler onEmailExists(ex: EmailExistsException, req: HttpServletRequest): ResponseEntity<ProblemDetail>
+            + @ExceptionHandler onVersionOutdated(ex: VersionOutdatedException, req: HttpServletRequest): ResponseEntity<ProblemDetail>
+            + @ExceptionHandler onUsernameExists(ex: UsernameExistsException, req: HttpServletRequest): ResponseEntity<ProblemDetail>
+            + @ExceptionHandler onPasswordInvalid(ex: PasswordInvalidException, req: HttpServletRequest): ResponseEntity<ProblemDetail>
+            + @ExceptionHandler onMessageNotReadable(ex: HttpMessageNotReadableException, req: HttpServletRequest): ResponseEntity<ProblemDetail>
+        }
+
+        MannschaftWriteController o-right-> "1" MannschaftWriteService : service
+        MannschaftWriteController ..> MannschaftUserDTO
+        MannschaftWriteController ..> MannschaftDTO
+        MannschaftWriteController .up.> UUID
+        MannschaftWriteController .up.> Optional
+        MannschaftWriteController .up.> Collection
+        MannschaftWriteController ..> ConstraintViolationsException
+        MannschaftWriteController ..> VersionOutdatedException
+        MannschaftWriteController ..> UsernameExistsException
+        MannschaftWriteController ..> PasswordInvalidException
+        MannschaftWriteController .up.> HttpMessageNotReadableException
+        MannschaftWriteController ..> VersionInvalidException
+        MannschaftWriteController ..> PatchOperation
+
+        MannschaftWriteController .up.> HttpServletRequest
+        MannschaftWriteController .up.> ResponseEntity
+        MannschaftWriteController .up.> Authentication
+        MannschaftWriteController .up.> ProblemDetail
+
+        MannschaftWriteController .up.> Controller
+        MannschaftWriteController .up.> RequestMapping
+        MannschaftWriteController .up.> PathVariable
+        MannschaftWriteController .up.> RequestBody
+        MannschaftWriteController .up.> ExceptionHandler
+
+        MannschaftDTO .[hidden].> UsernameExistsException
+    }
+}
+
+hide empty members
+
+footer (c) Juergen Zimmermann
+
+@enduml

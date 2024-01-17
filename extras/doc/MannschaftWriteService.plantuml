@@ -1,0 +1,83 @@
+' Copyright (C) 2019 - present Juergen Zimmermann, Hochschule Karlsruhe
+'
+' This program is free software: you can redistribute it and/or modify
+' it under the terms of the GNU General Public License as published by
+' the Free Software Foundation, either version 3 of the License, or
+' (at your option) any later version.
+'
+' This program is distributed in the hope that it will be useful,
+' but WITHOUT ANY WARRANTY; without even the implied warranty of
+' MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+' GNU General Public License for more details.
+'
+' You should have received a copy of the GNU General Public License
+' along with this program.  If not, see <https://www.gnu.org/licenses/>.
+@startuml MannschaftWriteService
+
+skinparam classAttributeIconSize 0
+
+package java.util {
+    class UUID
+}
+
+package org.springframework {
+    package stereotype {
+        interface Service
+    }
+
+    package transaction.annotation {
+        interface Transactional
+    }
+
+    package security.core.userdetails {
+        interface UserDetails
+    }
+
+    UUID .right[hidden].> UserDetails
+}
+
+package com.acme.mannschaft {
+    package security {
+        class CustomUserDetailsService << control >> << @Service >>
+    }
+
+    package mail  {
+        class Mailer << control >> << @Service >>
+
+        CustomUserDetailsService .right[hidden].> Mailer
+    }
+
+    package entity {
+        class Mannschaft << entity >>
+        Mannschaft .up[hidden].> UUID
+        Mannschaft .up[hidden].> UserDetails
+    }
+
+    package repository {
+        interface MannschaftRepository << control >>
+    }
+
+    package service #DDDDDD {
+        class MannschaftWriteService << control >> << @Service >> {
+            + create(mannschaft: Mannschaft, user: UserDetails): Mannschaft
+            + update(mannschaft: Mannschaft, id: UUID, version: String): Mannschaft
+            + deleteById(id: UUID)
+        }
+
+        MannschaftWriteService o--> "1" MannschaftRepository : repo
+        MannschaftWriteService o--> "1" CustomUserDetailsService : userService
+        MannschaftWriteService o--> "1" Mailer : mailer
+
+        MannschaftWriteService .right.> Mannschaft
+        MannschaftWriteService .up.> UUID
+        MannschaftWriteService .up.> UserDetails
+        MannschaftWriteService .up.> Service
+        MannschaftWriteService .up.> Transactional
+    }
+}
+
+hide empty members
+
+footer (c) Jürgen Zimmermann
+
+@enduml

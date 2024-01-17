@@ -1,0 +1,77 @@
+' Copyright (C) 2019 - present Juergen Zimmermann, Hochschule Karlsruhe
+'
+' This program is free software: you can redistribute it and/or modify
+' it under the terms of the GNU General Public License as published by
+' the Free Software Foundation, either version 3 of the License, or
+' (at your option) any later version.
+'
+' This program is distributed in the hope that it will be useful,
+' but WITHOUT ANY WARRANTY; without even the implied warranty of
+' MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+' GNU General Public License for more details.
+'
+' You should have received a copy of the GNU General Public License
+' along with this program.  If not, see <https://www.gnu.org/licenses/>.
+@startuml MannschaftService
+
+skinparam classAttributeIconSize 0
+
+package java.util {
+    interface List<T>
+    interface Map<K, V>
+    class UUID
+}
+
+package org.springframework {
+    package stereotype {
+        interface Service
+    }
+
+    package transaction.annotation {
+        interface Transactional
+    }
+
+    package security.core.userdetails {
+        interface UserDetails
+    }
+
+    List .right[hidden].> UserDetails
+}
+
+
+package com.acme.mannschaft {
+    package entity {
+        class Mannschaft << entity >>
+
+        Mannschaft .up[hidden].> UUID
+        Mannschaft .up[hidden].> UserDetails
+        Mannschaft .up[hidden].> Service
+        Mannschaft .up[hidden].> Transactional
+    }
+
+    package repository {
+        interface MannschaftRepository << control >>
+    }
+
+    package service #DDDDDD {
+        class MannschaftReadService << control >> << @Service >> {
+            + findById(id: UUID, user: UserDetails): Mannschaft
+            + find(suchkriterien: Map<String, List<String>>): List<Mannschaft>
+        }
+
+        MannschaftReadService o--> "1" MannschaftRepository : repo
+        MannschaftReadService .up.> Mannschaft
+        MannschaftReadService .up.> UUID
+        MannschaftReadService .up.> List
+        MannschaftReadService .up.> Map
+        MannschaftReadService .up.> Service
+        MannschaftReadService ..> Transactional
+        MannschaftReadService ..> UserDetails
+    }
+}
+
+hide empty members
+
+footer (c) Jürgen Zimmermann
+
+@enduml

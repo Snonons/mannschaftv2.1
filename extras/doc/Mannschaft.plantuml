@@ -1,0 +1,101 @@
+' Copyright (C) 2019 - present Juergen Zimmermann, Hochschule Karlsruhe
+'
+' This program is free software: you can redistribute it and/or modify
+' it under the terms of the GNU General Public License as published by
+' the Free Software Foundation, either version 3 of the License, or
+' (at your option) any later version.
+'
+' This program is distributed in the hope that it will be useful,
+' but WITHOUT ANY WARRANTY; without even the implied warranty of
+' MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+' GNU General Public License for more details.
+'
+' You should have received a copy of the GNU General Public License
+' along with this program.  If not, see <https://www.gnu.org/licenses/>.
+@startuml Mannschaft
+
+skinparam classAttributeIconSize 0
+' skinparam monochrome true
+
+package java {
+    package util {
+        class UUID
+        interface List<T>
+        class URL
+    }
+
+    package time {
+        class LocalDate
+        class LocalDateTime
+    }
+
+    LocalDate .right[hidden].> LocalDateTime
+}
+
+package jakarta.persistence {
+    interface "@Entity" as Entity
+    interface "@Table" as Table
+
+    Entity -[hidden]down-> Table
+    LocalDateTime .up[hidden].> Table
+}
+
+package com.acme.mannschaft {
+    package entity #DDDDDD {
+        class Spieler << entity >> {
+            @Id
+            @GeneratedValue
+            id : UUID
+            vorname: String
+            nachname: String
+        }
+        Spieler ..> UUID
+
+        class Trainer << entity >> {
+            @Id
+            @GeneratedValue
+            id : UUID
+            vorname: String
+            nachname: String
+        }
+        Trainer ..> UUID
+
+        class Mannschaft << entity >>  << @Entity >>  << @Table >> {
+            @Id
+            @GeneratedValue
+            id : UUID
+            @Version
+            version : int
+            name : String
+            gruendungsjahr : date
+            @Transient
+            @UniqueElements
+            spielerList: List<spieler>
+            @Column
+            spielerListStr: String
+            username: String
+            @CreationTimestamp
+            erzeugt: LocalDateTime
+            @UpdateTimestamp
+            aktualisiert: LocalDateTime
+        }
+
+        Mannschaft *--> "0..*" Spieler : @OneToOne(cascade = [...]) \n@JoinColumn(...) \numsaetze
+        Mannschaft *--> "1" Trainer : @OneToOne(cascade = [...]) \nadresse
+
+        Mannschaft .right.> UUID
+        Mannschaft .right.> URL
+        Mannschaft .right.> LocalDate
+        Mannschaft .right.> LocalDateTime
+
+        Mannschaft .right.> List
+        Mannschaft .right.> Entity
+        Mannschaft .right.> Table
+    }
+}
+
+hide empty members
+
+footer (c) Jürgen Zimmermann
+
+@enduml

@@ -1,0 +1,80 @@
+' Copyright (C) 2019 - present Juergen Zimmermann, Hochschule Karlsruhe
+'
+' This program is free software: you can redistribute it and/or modify
+' it under the terms of the GNU General Public License as published by
+' the Free Software Foundation, either version 3 of the License, or
+' (at your option) any later version.
+'
+' This program is distributed in the hope that it will be useful,
+' but WITHOUT ANY WARRANTY; without even the implied warranty of
+' MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+' GNU General Public License for more details.
+'
+' You should have received a copy of the GNU General Public License
+' along with this program.  If not, see <https://www.gnu.org/licenses/>.
+@startuml MannschaftModel
+
+skinparam classAttributeIconSize 0
+' skinparam monochrome true
+
+package java {
+    package util {
+        interface List<T>
+        class URL
+    }
+
+    package time {
+        class LocalDate
+    }
+
+    URL .[hidden].> LocalDate
+}
+
+package org.springframework.hateoas {
+    class RepresentationModel<T>
+}
+
+package com.acme.mannschaft {
+    package entity {
+        class Mannschaft
+        class Adresse
+
+        enum GeschlechtType
+        enum FamilienstandType
+        enum InteresseType
+    }
+
+    package rest #DDDDDD {
+        class MannschaftModel << entity >> {
+            readonly nachname : String
+            readonly email : String
+            readonly kategorie: int
+            readonly hasNewsletter : boolean
+            readonly geburtsdatum: LocalDate
+            readonly homepage: URL
+            readonly geschlecht: GeschlechtType
+            readonly familienstand: FamilienstandType
+            readonly interessen: List<InteresseType>
+
+            MannschaftModel(mannschaft: Mannschaft)
+        }
+
+        MannschaftModel *--> "1" Adresse : adresse
+        MannschaftModel ..> GeschlechtType
+        MannschaftModel ..> FamilienstandType
+        MannschaftModel ..> InteresseType
+
+        MannschaftModel -up-|> RepresentationModel
+
+        MannschaftModel ..> Mannschaft
+        MannschaftModel .right.> LocalDate
+        MannschaftModel ..> URL
+        MannschaftModel .right.> List
+    }
+}
+
+hide empty members
+
+footer (c) Jürgen Zimmermann
+
+@enduml

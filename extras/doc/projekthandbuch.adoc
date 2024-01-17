@@ -1,0 +1,164 @@
+// Copyright (C) 2019 - present Juergen Zimmermann, Hochschule Karlsruhe
+//
+// This program is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+//
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+//
+// You should have received a copy of the GNU General Public License
+// along with this program.  If not, see <https://www.gnu.org/licenses/>.
+= Projekthandbuch
+Jürgen Zimmermann <Juergen.Zimmermann@h-ka.de>
+:doctype: book
+:toc: left
+:sectanchors:
+:sectlinks:
+:sectnums:
+:source-highlighter: coderay
+:icons: font
+
+// https://github.com/asciidoctor/asciidoctorj
+// https://github.com/asciidoctor/asciidoctor-diagram
+// http://de.plantuml.com/classes.html
+// http://de.plantuml.com/component.html
+// https://github.com/odrotbohm/asciidoctor-plantuml
+
+IMPORTANT: Copyright (C) 2015 - present Jürgen Zimmermann, Hochschule Karlsruhe. +
+           Free use of this software is granted under the terms of the
+           GNU General Public License (GPL) v3. +
+           For the full text of the license, see the http://www.gnu.org/licenses/gpl-3.0.html[license] file.
+
+== Der Microservice Mannschaft
+
+=== Der Microservice im Überblick
+
+Praesent sapien massa, convallis a pellentesque nec, egestas non nisi. Cras ultricies ligula sed magna dictum porta.
+
+.Architektur als C4 Modell für die Microservices
+[plantuml,c4,svg]
+
+Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam,
+eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.
+
+.Use Cases für den Microservice "mannschaft"
+[plantuml,use-cases,svg]
+
+
+Vestibulum ac diam sit amet quam vehicula elementum sed sit amet dui. Vestibulum ac diam sit amet quam vehicula
+elementum sed sit amet dui.
+
+.Komponenten für die REST-Schnittstelle
+[plantuml,komponenten,svg]
+----
+include::./komponenten.plantuml[]
+----
+
+=== Die REST-Schnittstelle
+
+Mauris blandit aliquet elit, eget tincidunt nibh pulvinar a. Donec sollicitudin molestie malesuada.
+
+."MannschaftGetController" für Lesezugriffe an der REST-Schnittstelle
+[plantuml,MannschaftGetController,svg]
+----
+include::./MannschaftGetController.plantuml[]
+----
+
+.Die Klasse "MannschaftModel" für den Datenaustausch bei GET
+[plantuml,MannschaftModel,svg]
+----
+include::./MannschaftModel.plantuml[]
+----
+
+."Sequenzdiagramm" mit den Methodenaufrufen
+[plantuml,sequenzdiagramm,svg]
+
+."MannschaftWriteController" für Schreibzugriffe an der REST-Schnittstelle
+[plantuml,MannschaftWriteController,svg]
+----
+include::./MannschaftWriteController.plantuml[]
+----
+
+.Die Klasse "MannschaftUserDTO" für den Datenaustausch bei POST
+[plantuml,MannschaftUserDTO,svg]
+----
+include::./MannschaftUserDTO.plantuml[]
+----
+
+=== Die Geschäftslogik
+
+Proin eget tortor risus. Curabitur aliquet quam id dui posuere blandit.
+
+."MannschaftReadService" im Anwendungskern
+[plantuml,MannschaftReadService,svg]
+----
+include::./MannschaftReadService.plantuml[]
+----
+
+."MannschaftWriteService" für die Geschäftslogik
+[plantuml,MannschaftWriteService,svg]
+----
+include::./MannschaftWriteService.plantuml[]
+----
+
+=== Die Entity-Klassen
+
+Mauris blandit aliquet elit, eget tincidunt nibh pulvinar a. Donec rutrum congue leo eget malesuada.
+
+.Die Entity-Klasse "Mannschaft" für Mannschaftndaten
+[plantuml,Mannschaft,svg]
+----
+include::./Mannschaft.plantuml[]
+----
+
+=== ER-Diagramm
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+
+.ER-Diagramm
+[plantuml,ER-Diagramm,svg]
+----
+include::./er-diagramm.plantuml[]
+----
+
+== Programmierrichtlinien
+
+TIP: Als Studierende/r sollte man sich frühzeitig an Programmierrichtlinien
+     gewöhnen. Das hinterlässt im späteren Praxissemester einen professionellen Eindruck.
+
+=== Java
+
+[horizontal]
+_Google_:: https://google.github.io/styleguide/javaguide.html
+_Microsoft Azure_:: https://azure.github.io/azure-sdk/java_introduction.html
+_Mozilla_:: https://firefox-source-docs.mozilla.org/code-quality/coding-style/coding_style_java.html
+
+=== SQL
+
+[horizontal]
+_SQL_:: https://www.sqlstyle.guide
+
+=== TypeScript und JavaScript
+
+[horizontal]
+_E-Book für TypeScript_:: https://github.com/gibbok/typescript-book
+_Google_:: https://google.github.io/styleguide/tsguide.html
+_React bei Airbnb_:: https://github.com/airbnb/javascript/tree/master/react
+_Angular_:: https://angular.io/guide/style-guide.html
+_Microsoft_:: https://github.com/Microsoft/TypeScript/wiki/Coding-guidelines
+
+=== Python
+
+[horizontal]
+_Google_:: https://google.github.io/styleguide/pyguide.html
+_The Zen of Python_:: https://peps.python.org/pep-0020
+
+=== Kotlin
+
+[horizontal]
+_Kotlin_:: https://kotlinlang.org/docs/coding-conventions.html
+_Android_:: https://developer.android.com/kotlin/style-guide
