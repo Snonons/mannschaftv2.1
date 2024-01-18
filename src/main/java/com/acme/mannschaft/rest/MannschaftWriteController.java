@@ -85,15 +85,13 @@ public class MannschaftWriteController {
      * @param mannschaftUserDTO Das Mannschaftenobjekt mit den Benutzerdaten aus dem eingegangenen Request-Body.
      * @param request Das Request-Objekt, um Location im Response-Header zu erstellen.
      * @return Response mit Statuscode 201 einschließlich Location-Header oder Statuscode 422 falls Constraints verletzt
-     *      sind oder die Emailadresse bereits existiert oder Statuscode 400 falls syntaktische Fehler im Request-Body
-     *      vorliegen.
+     *      sind oder Statuscode 400 falls syntaktische Fehler im Request-Body vorliegen.
      * @throws URISyntaxException falls die URI im Request-Objekt nicht korrekt wäre
      */
     @PostMapping(consumes = APPLICATION_JSON_VALUE)
     @Operation(summary = "Einen neuen Mannschaften anlegen", tags = "Neuanlegen")
     @ApiResponse(responseCode = "201", description = "Mannschaft neu angelegt")
     @ApiResponse(responseCode = "400", description = "Syntaktische Fehler im Request-Body")
-    @ApiResponse(responseCode = "422", description = "Ungültige Werte oder Email vorhanden")
     @SuppressWarnings("TrailingComment")
     ResponseEntity<Void> post(
         @RequestBody final MannschaftUserDTO mannschaftUserDTO,
@@ -124,7 +122,6 @@ public class MannschaftWriteController {
      * @param version Versionsnummer aus dem Header If-Match
      * @param request Das Request-Objekt, um ggf. die URL für ProblemDetail zu ermitteln
      * @return Response mit Statuscode 204 oder Statuscode 400, falls der JSON-Datensatz syntaktisch nicht korrekt ist
-     *      oder 422 falls Constraints verletzt sind oder die Emailadresse bereits existiert
      *      oder 412 falls die Versionsnummer nicht ok ist oder 428 falls die Versionsnummer fehlt.
      */
     @PutMapping(path = "{id:" + ID_PATTERN + "}", consumes = APPLICATION_JSON_VALUE)
@@ -133,7 +130,6 @@ public class MannschaftWriteController {
     @ApiResponse(responseCode = "400", description = "Syntaktische Fehler im Request-Body")
     @ApiResponse(responseCode = "404", description = "Mannschaft nicht vorhanden")
     @ApiResponse(responseCode = "412", description = "Versionsnummer falsch")
-    @ApiResponse(responseCode = "422", description = "Ungültige Werte oder Email vorhanden")
     @ApiResponse(responseCode = "428", description = VERSIONSNUMMER_FEHLT)
     ResponseEntity<Void> put(
         @PathVariable final UUID id,

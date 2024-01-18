@@ -26,11 +26,9 @@ import org.springframework.util.LinkedMultiValueMap;
  * @author <a href="mailto:Juergen.Zimmermann@h-ka.de">Jürgen Zimmermann</a>
  *
  * @param nachname Nachname
- * @param email Emailadresse
  */
 record Suchkriterien(
-    String nachname,
-    String email
+    String nachname
 ) {
     /**
      * Konvertierung in eine MultiValueMap.
@@ -41,9 +39,6 @@ record Suchkriterien(
         final Map<String, List<String>> map = new LinkedMultiValueMap<>();
         if (nachname != null) {
             map.put("nachname", List.of(nachname));
-        }
-        if (email != null) {
-            map.put("email", List.of(email));
         }
         return map;
     }

@@ -30,8 +30,6 @@ import org.springframework.stereotype.Component;
 
 /**
  * Singleton-Klasse, um Specifications für Queries in Spring Data JPA zu bauen.
- *
- * @author <a href="mailto:Juergen.Zimmermann@h-ka.de">Jürgen Zimmermann</a>
  */
 @Component
 @Slf4j
@@ -106,7 +104,8 @@ public class SpecificationBuilder {
     }
 
     private Specification<Mannschaft> vorname(final String prefix) {
-        return (root, query, builder) -> builder.like(root.get(Mannschaft_.trainer).get(Trainer_.vorname), STR."\{prefix}%");
+        return (root, query, builder)
+            -> builder.like(root.get(Mannschaft_.trainer).get(Trainer_.vorname), STR."\{prefix}%");
     }
 
     private Specification<Mannschaft> nachname(final String prefix) {

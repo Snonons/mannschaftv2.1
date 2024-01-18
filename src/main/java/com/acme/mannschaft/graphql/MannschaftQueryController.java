@@ -36,8 +36,6 @@ import static java.util.Collections.emptyMap;
 
 /**
  * Eine Controller-Klasse für das Lesen mit der GraphQL-Schnittstelle und den Typen aus dem GraphQL-Schema.
- *
- * @author <a href="mailto:Juergen.Zimmermann@h-ka.de">Jürgen Zimmermann</a>
  */
 @Controller
 @RequiredArgsConstructor
@@ -73,22 +71,24 @@ class MannschaftQueryController {
     Collection<Mannschaft> find(@Argument final Optional<Suchkriterien> input) {
         log.debug("find: input={}", input);
         final var suchkriterien = input.map(Suchkriterien::toMap).orElse(emptyMap());
-        // TODO Mitladen von umsaetze
+        // TODO Mitladen von spielerList
         final var mannschaften = service.find(suchkriterien);
         log.debug("find: mannschaften={}", mannschaften);
         return mannschaften;
     }
 
     /**
-     * Handler-Methode für das GraphQL-Field "umsaetze" für den GraphQL-Type "Mannschaft".
+     * Handler-Methode für das GraphQL-Field "spielerList" für den GraphQL-Type "Mannschaft".
      *
      * @param mannschaft Injiziertes Objekt vom GraphQL-Type "Mannschaft", zu dem diese Handler-Methode aufgerufen wird.
-     * @param first die ersten Umsatzdaten in der Liste der Umsätze zum gefundenen Mannschaften
-     * @return Liste mit Umsatz-Objekten, die für das Field "umsaetze" beim gefundenen Mannschaft-Objekt verwendet werden.
+     * @param first die ersten Spielerdaten in der Liste der Spieler zu gefundenen Mannschaften.
+     * @return Liste mit Spieler-Objekten, die für das Field "spielerList" bei
+     * gefundenen Mannschaft-Objekt verwendet werden.
      */
     @SchemaMapping
     Collection<Spieler> spielerList(final Mannschaft mannschaft, @Argument final Integer first) {
-        log.debug("spielerList: mannschaft={}, spielerList={}, first={}", mannschaft, mannschaft.getSpielerList(), first);
+        log.debug
+            ("spielerList: mannschaft={}, spielerList={}, first={}", mannschaft, mannschaft.getSpielerList(), first);
         if (first == null) {
             return mannschaft.getSpielerList();
         }
@@ -96,8 +96,8 @@ class MannschaftQueryController {
             return List.of();
         }
 
-        final var anzahlUmsaetze = mannschaft.getSpielerList().size();
-        final var end = first <= anzahlUmsaetze ? first : anzahlUmsaetze;
+        final var anzahlSpielerList = mannschaft.getSpielerList().size();
+        final var end = first <= anzahlSpielerList ? first : anzahlSpielerList;
         return mannschaft.getSpielerList().subList(0, end);
     }
 }

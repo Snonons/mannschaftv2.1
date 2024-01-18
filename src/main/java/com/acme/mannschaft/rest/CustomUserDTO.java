@@ -37,6 +37,7 @@ public record CustomUserDTO(String username, String password) {
      * @return Objekt für den Anwendungskern
      */
     UserDetails toUserDetails() {
-        return new CustomUser(username, password, List.of(new SimpleGrantedAuthority(STR."\{ROLE_PREFIX}\{MANNSCHAFT}")));
+        return new CustomUser(username, password, List.of
+            (new SimpleGrantedAuthority(STR."\{ROLE_PREFIX}\{MANNSCHAFT}")));
     }
 }

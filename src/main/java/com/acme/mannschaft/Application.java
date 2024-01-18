@@ -39,7 +39,6 @@ import static org.springframework.hateoas.support.WebStack.WEBMVC;
  */
 @SpringBootApplication(proxyBeanMethods = false)
 @Import({ApplicationConfig.class, DevConfig.class})
-@EnableConfigurationProperties(MailProps.class)
 @EnableHypermediaSupport(type = HAL, stacks = WEBMVC)
 @EnableJpaRepositories
 @EnableWebSecurity

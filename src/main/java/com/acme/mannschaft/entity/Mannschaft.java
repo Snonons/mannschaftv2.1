@@ -72,7 +72,7 @@ public class Mannschaft {
     /**
      * NamedEntityGraph für das Attribut "trainer".
      */
-    public static final String TRAINER_GRAPH = "Mannschaft.adresse";
+    public static final String TRAINER_GRAPH = "Mannschaft.trainer";
 
     /**
      * NamedEntityGraph für die Attribute "trainer" und "spielerList".

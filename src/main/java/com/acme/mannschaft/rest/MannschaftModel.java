@@ -32,9 +32,6 @@ import org.springframework.hateoas.server.core.Relation;
 /**
  * Model-Klasse für Spring HATEOAS. @lombok.Data fasst die Annotationen @ToString, @EqualsAndHashCode, @Getter, @Setter
  * und @RequiredArgsConstructor zusammen.
- * <img src="../../../../../asciidoc/MannschaftModel.svg" alt="Klassendiagramm">
- *
- * @author <a href="mailto:Juergen.Zimmermann@h-ka.de">Jürgen Zimmermann</a>
  */
 @JsonPropertyOrder({
     "name", "gruendungsjahr", "spielerList", "trainer"

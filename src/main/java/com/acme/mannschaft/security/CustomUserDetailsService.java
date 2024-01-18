@@ -97,7 +97,8 @@ public class CustomUserDetailsService implements UserDetailsService {
             throw new UsernameExistsException(username);
         }
 
-        // Die Account-Informationen des Mannschaften transformieren: in Account-Informationen fuer die Security-Komponente
+        // Die Account-Informationen des Mannschaften transformieren:
+        // in Account-Informationen fuer die Security-Komponente
         final var login = new Login();
         login.setUsername(username.toLowerCase(GERMAN));
 

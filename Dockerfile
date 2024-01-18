@@ -73,7 +73,7 @@ LABEL org.opencontainers.image.title="mannschaft" \
       org.opencontainers.image.version="2023.10.1-eclipse" \
       org.opencontainers.image.licenses="GPL-3.0-or-later" \
       org.opencontainers.image.vendor="Juergen Zimmermann" \
-      org.opencontainers.image.authors="Juergen.Zimmermann@h-ka.de" \
+      org.opencontainers.image.authors="maje1024@h-ka.de" \
       org.opencontainers.image.base.name="eclipse-temurin:LATEST_VERSION-jre-jammy"
 
 WORKDIR /opt/app

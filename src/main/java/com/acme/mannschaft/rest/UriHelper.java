@@ -25,8 +25,6 @@ import static com.acme.mannschaft.rest.MannschaftGetController.REST_PATH;
 
 /**
  * Hilfsklasse um URIs für HATEOAS oder für URIs in ProblemDetail zu ermitteln, falls ein API-Gateway verwendet wird.
- *
- * @author <a href="mailto:Juergen.Zimmermann@h-ka.de">Jürgen Zimmermann</a>
  */
 @Component
 @Slf4j

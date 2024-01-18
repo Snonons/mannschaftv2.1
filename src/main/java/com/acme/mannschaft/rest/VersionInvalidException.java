@@ -25,8 +25,6 @@ import static com.acme.mannschaft.rest.ProblemType.PRECONDITION;
 
 /**
  * Exception, falls die Versionsnummer im ETag fehlt oder syntaktisch ungültig ist.
- *
- * @author <a href="mailto:Juergen.Zimmermann@h-ka.de">Jürgen Zimmermann</a>
  */
 class VersionInvalidException extends ErrorResponseException {
     VersionInvalidException(final HttpStatusCode status, final String message, final URI uri) {

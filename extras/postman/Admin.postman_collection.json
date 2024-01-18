@@ -11,27 +11,6 @@
 				{
 					"name": "Health",
 					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"pm.test('Statuscode 200', () => {\r",
-									"    pm.response.to.have.status(200);\r",
-									"});\r",
-									"pm.test('Status UP', () => {\r",
-									"    const body = pm.response.json();\r",
-									"    pm.expect(body.status).to.be.equal('UP');\r",
-									"    const { db, diskSpace, livenessState, mail, readinessState } = body.components;\r",
-									"    pm.expect(db.status).to.be.equal('UP');\r",
-									"    pm.expect(diskSpace.status).to.be.equal('UP');\r",
-									"    pm.expect(livenessState.status).to.be.equal('UP');\r",
-									"    pm.expect(mail.status).to.be.equal('UP');\r",
-									"    pm.expect(readinessState.status).to.be.equal('UP');\r",
-									"});"
-								],
-								"type": "text/javascript"
-							}
-						}
 					],
 					"request": {
 						"method": "GET",
@@ -48,21 +27,6 @@
 				{
 					"name": "Liveness",
 					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"pm.test('Statuscode 200', () => {\r",
-									"    pm.response.to.have.status(200);\r",
-									"});\r",
-									"pm.test('Status UP', () => {\r",
-									"    const body = pm.response.json();\r",
-									"    pm.expect(body.status).to.be.equal('UP');\r",
-									"});"
-								],
-								"type": "text/javascript"
-							}
-						}
 					],
 					"request": {
 						"method": "GET",
@@ -82,21 +46,6 @@
 				{
 					"name": "Readiness",
 					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"pm.test('Statuscode 200', () => {\r",
-									"    pm.response.to.have.status(200);\r",
-									"});\r",
-									"pm.test('Status UP', () => {\r",
-									"    const body = pm.response.json();\r",
-									"    pm.expect(body.status).to.be.equal('UP');\r",
-									"});"
-								],
-								"type": "text/javascript"
-							}
-						}
 					],
 					"request": {
 						"method": "GET",
@@ -122,17 +71,6 @@
 				{
 					"name": "actuator",
 					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"pm.test('Statuscode 200', () => {\r",
-									"    pm.response.to.have.status(200);\r",
-									"});"
-								],
-								"type": "text/javascript"
-							}
-						}
 					],
 					"request": {
 						"method": "GET",
@@ -149,17 +87,6 @@
 				{
 					"name": "info",
 					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"pm.test('Statuscode 200', () => {\r",
-									"    pm.response.to.have.status(200);\r",
-									"});"
-								],
-								"type": "text/javascript"
-							}
-						}
 					],
 					"request": {
 						"method": "GET",
@@ -179,17 +106,6 @@
 				{
 					"name": "mappings",
 					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"pm.test('Statuscode 200', () => {\r",
-									"    pm.response.to.have.status(200);\r",
-									"});"
-								],
-								"type": "text/javascript"
-							}
-						}
 					],
 					"request": {
 						"method": "GET",
@@ -209,17 +125,6 @@
 				{
 					"name": "beans",
 					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"pm.test('Statuscode 200', () => {\r",
-									"    pm.response.to.have.status(200);\r",
-									"});"
-								],
-								"type": "text/javascript"
-							}
-						}
 					],
 					"request": {
 						"method": "GET",
@@ -239,17 +144,6 @@
 				{
 					"name": "env",
 					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"pm.test('Statuscode 200', () => {\r",
-									"    pm.response.to.have.status(200);\r",
-									"});"
-								],
-								"type": "text/javascript"
-							}
-						}
 					],
 					"request": {
 						"method": "GET",
@@ -269,22 +163,6 @@
 				{
 					"name": "metrics",
 					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"pm.test('Statuscode 200', () => {\r",
-									"    pm.response.to.have.status(200);\r",
-									"});\r",
-									"pm.test('get-by-id in \"names\"', () => {\r",
-									"    const body = pm.response.json();\r",
-									"    const { names } = body;\r",
-									"    pm.expect(names).to.be.an('array').that.includes('get-by-id');\r",
-									"});"
-								],
-								"type": "text/javascript"
-							}
-						}
 					],
 					"request": {
 						"method": "GET",
@@ -304,27 +182,6 @@
 				{
 					"name": "metrics get-by-id",
 					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"pm.test('Statuscode 200', () => {\r",
-									"    pm.response.to.have.status(200);\r",
-									"});\r",
-									"pm.test('body mit availableTags', () => {\r",
-									"    const body = pm.response.json();\r",
-									"    const { name, availableTags } = body;\r",
-									"    pm.expect(name).to.be.equal('get-by-id');\r",
-									"    pm.expect(availableTags).to.be.an('array').that.has.length(2);\r",
-									"    const tag0 = availableTags[0]\r",
-									"    pm.expect(tag0).to.be.an('object');\r",
-									"    pm.expect(tag0.tag).to.be.equal('application');\r",
-									"    pm.expect(tag0.values).to.be.an('array').that.includes('mannschaft');\r",
-									"});"
-								],
-								"type": "text/javascript"
-							}
-						}
 					],
 					"request": {
 						"method": "GET",
@@ -345,22 +202,6 @@
 				{
 					"name": "prometheus",
 					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"pm.test('Statuscode 200', () => {\r",
-									"    pm.response.to.have.status(200);\r",
-									"});\r",
-									"pm.test('get-by-id in \"names\"', () => {\r",
-									"    const body = pm.response.json();\r",
-									"    const { names } = body;\r",
-									"    pm.expect(names).to.be.an('array').that.includes('get-by-id');\r",
-									"});"
-								],
-								"type": "text/javascript"
-							}
-						}
 					],
 					"request": {
 						"method": "GET",
@@ -402,36 +243,12 @@
 							""
 						]
 					}
-				},
-				{
-					"listen": "test",
-					"script": {
-						"type": "text/javascript",
-						"exec": [
-							""
-						]
-					}
 				}
 			]
 		},
 		{
 			"name": "Shutdown",
 			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"exec": [
-							"pm.test('Statuscode 200', () => {\r",
-							"    pm.response.to.have.status(200);\r",
-							"});\r",
-							"pm.test('Message im Body', () => {\r",
-							"    const body = pm.response.json();\r",
-							"    pm.expect(body.message).to.match(/^Shutting down/u);\r",
-							"});"
-						],
-						"type": "text/javascript"
-					}
-				}
 			],
 			"request": {
 				"auth": {
@@ -467,15 +284,6 @@
 	"event": [
 		{
 			"listen": "prerequest",
-			"script": {
-				"type": "text/javascript",
-				"exec": [
-					""
-				]
-			}
-		},
-		{
-			"listen": "test",
 			"script": {
 				"type": "text/javascript",
 				"exec": [

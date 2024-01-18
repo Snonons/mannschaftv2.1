@@ -54,7 +54,6 @@ public class MannschaftWriteService {
      * @param user Die Benutzerdaten für den neuen Mannschaften.
      * @return Der neu angelegte Mannschaften mit generierter ID
      * @throws ConstraintViolationsException Falls mindestens ein Constraint verletzt ist.
-     * @throws EmailExistsException Es gibt bereits einen Mannschaften mit der Emailadresse.
      * @throws PasswordInvalidException falls das Passwort ungültig ist
      * @throws UsernameExistsException falls der Benutzername bereits existiert
      */
@@ -63,8 +62,8 @@ public class MannschaftWriteService {
     @SuppressWarnings("TrailingComment")
     public Mannschaft create(final Mannschaft mannschaft, final UserDetails user) {
         log.debug("create: mannschaft={}", mannschaft);
-        log.debug("create: adresse={}", mannschaft.getTrainer());
-        log.debug("create: umsaetze={}", mannschaft.getSpielerList());
+        log.debug("create: trainer={}", mannschaft.getTrainer());
+        log.debug("create: spielerList={}", mannschaft.getSpielerList());
         log.debug("create: user={}", user);
 
         final var violations = validator.validate(mannschaft, Default.class, Mannschaft.NeuValidation.class);
@@ -93,7 +92,6 @@ public class MannschaftWriteService {
      * @throws ConstraintViolationsException Falls mindestens ein Constraint verletzt ist.
      * @throws NotFoundException Kein Mannschaft zur ID vorhanden.
      * @throws VersionOutdatedException Die Versionsnummer ist veraltet und nicht aktuell.
-     * @throws EmailExistsException Es gibt bereits einen Mannschaften mit der Emailadresse.
      */
     @Transactional
     public Mannschaft update(final Mannschaft mannschaft, final UUID id, final int version) {

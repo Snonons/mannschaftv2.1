@@ -30,6 +30,7 @@ record MannschaftInput (
      * @return Das konvertierte CustomUser-Objekt
      */
     UserDetails toUserDetails() {
-        return new CustomUser(username, password, List.of(new SimpleGrantedAuthority(STR."\{ROLE_PREFIX}\{MANNSCHAFT}")));
+        return new CustomUser
+            (username, password, List.of(new SimpleGrantedAuthority(STR."\{ROLE_PREFIX}\{MANNSCHAFT}")));
     }
 }

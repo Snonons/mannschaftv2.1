@@ -24,9 +24,8 @@ import org.mapstruct.Mapping;
 import org.mapstruct.NullValueMappingStrategy;
 
 /**
- * Mapper zwischen Entity-Klassen. Siehe build\generated\sources\annotationProcessor\java\...\MannschaftInputMapperImpl.java.
- *
- * @author <a href="mailto:Juergen.Zimmermann@h-ka.de">Jürgen Zimmermann</a>
+ * Mapper zwischen Entity-Klassen.
+ * Siehe build\generated\sources\annotationProcessor\java\...\MannschaftInputMapperImpl.java.
  */
 @Mapper(nullValueIterableMappingStrategy = NullValueMappingStrategy.RETURN_DEFAULT)
 interface MannschaftInputMapper {

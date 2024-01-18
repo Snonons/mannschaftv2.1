@@ -50,7 +50,8 @@ final class Banner {
     private static final String SERVICE_HOST = System.getenv("MANNSCHAFT_SERVICE_HOST");
     private static final String KUBERNETES = SERVICE_HOST == null
         ? "N/A"
-        : STR."MANNSCHAFT_SERVICE_HOST=\{SERVICE_HOST}, MANNSCHAFT_SERVICE_PORT=\{System.getenv("MANNSCHAFT_SERVICE_PORT")}";
+        : STR."MANNSCHAFT_SERVICE_HOST=\{SERVICE_HOST}, MANNSCHAFT_SERVICE_PORT=\{System.getenv
+        ("MANNSCHAFT_SERVICE_PORT")}";
 
     /**
      * Banner für den Server-Start.

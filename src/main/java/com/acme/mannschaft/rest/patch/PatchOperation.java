@@ -23,7 +23,7 @@ package com.acme.mannschaft.rest.patch;
  * @author <a href="mailto:Juergen.Zimmermann@h-ka.de">Jürgen Zimmermann</a>
  *
  * @param op PATCH-Operation, z.B. add, remove, replace.
- * @param path Pfad zur adressierten Property, z.B. /email.
+ * @param path Pfad zur adressierten Property.
  * @param value Der neue Wert für die Property.
  */
 @SuppressWarnings("ClassNamePrefixedWithPackageName")

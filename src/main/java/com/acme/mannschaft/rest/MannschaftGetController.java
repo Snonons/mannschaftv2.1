@@ -56,9 +56,6 @@ import static org.springframework.http.ResponseEntity.status;
 /**
  * Eine Controller-Klasse bildet die REST-Schnittstelle, wobei die HTTP-Methoden, Pfade und MIME-Typen auf die
  * Methoden der Klasse abgebildet werden. Public, damit Pfade für Zugriffsschutz verwendet werden können.
- * <img src="../../../../../asciidoc/MannschaftGetController.svg" alt="Klassendiagramm">
- *
- * @author <a href="mailto:Juergen.Zimmermann@h-ka.de">Jürgen Zimmermann</a>
  */
 @RestController
 @RequestMapping(REST_PATH)
@@ -153,7 +150,8 @@ public class MannschaftGetController {
      *
      * @param suchkriterien Query-Parameter als Map.
      * @param request Das Request-Objekt, um Links für HATEOAS zu erstellen.
-     * @return Ein Response mit dem Statuscode 200 und den gefundenen Mannschaften als CollectionModel oder Statuscode 404.
+     * @return Ein Response mit dem Statuscode 200
+     * und den gefundenen Mannschaften als CollectionModel oder Statuscode 404.
      */
     @GetMapping(produces = HAL_JSON_VALUE)
     @Operation(summary = "Suche mit Suchkriterien", tags = "Suchen")

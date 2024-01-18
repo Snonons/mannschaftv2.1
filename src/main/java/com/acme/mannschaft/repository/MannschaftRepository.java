@@ -33,8 +33,6 @@ import static com.acme.mannschaft.entity.Mannschaft.TRAINER_SPIELERLIST_GRAPH;
 
 /**
  * Repository für den DB-Zugriff bei Mannschaften.
- *
- * @author <a href="mailto:Juergen.Zimmermann@h-ka.de">Jürgen Zimmermann</a>
  */
 @Repository
 public interface MannschaftRepository extends JpaRepository<Mannschaft, UUID>, JpaSpecificationExecutor<Mannschaft> {

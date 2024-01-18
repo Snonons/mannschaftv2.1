@@ -7,27 +7,6 @@
 		{
 			"name": "Login",
 			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"exec": [
-							"pm.test('Statuscode 200', () => {\r",
-							"    pm.response.to.have.status(200);\r",
-							"});\r",
-							"pm.test('Content-Type text/plain', () => {\r",
-							"    const { response } = pm;\r",
-							"    const contentType = response.headers.get('Content-Type');\r",
-							"    pm.expect(contentType).to.be.equal('application/json');\r",
-							"});\r",
-							"pm.test('Rollen im Body', () => {\r",
-							"    const body = pm.response.json();\r",
-							"    pm.expect(body).to.be.an('array').that.is.not.empty;\r",
-							"    body.forEach(rolle => pm.expect(rolle).to.be.a('string').that.is.not.empty);\r",
-							"});"
-						],
-						"type": "text/javascript"
-					}
-				}
 			],
 			"request": {
 				"method": "POST",
@@ -62,27 +41,6 @@
 		{
 			"name": "Eigene Rollen",
 			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"exec": [
-							"pm.test('Statuscode 200', () => {\r",
-							"    pm.response.to.have.status(200);\r",
-							"});\r",
-							"pm.test('Content-Type text/plain', () => {\r",
-							"    const { response } = pm;\r",
-							"    const contentType = response.headers.get('Content-Type');\r",
-							"    pm.expect(contentType).to.be.equal('application/json');\r",
-							"});\r",
-							"pm.test('Rollen im Body', () => {\r",
-							"    const body = pm.response.json();\r",
-							"    pm.expect(body).to.be.an('array').that.is.not.empty;\r",
-							"    body.forEach(rolle => pm.expect(rolle).to.be.a('string').that.is.not.empty);\r",
-							"});"
-						],
-						"type": "text/javascript"
-					}
-				}
 			],
 			"request": {
 				"auth": {
@@ -118,15 +76,6 @@
 	"event": [
 		{
 			"listen": "prerequest",
-			"script": {
-				"type": "text/javascript",
-				"exec": [
-					""
-				]
-			}
-		},
-		{
-			"listen": "test",
 			"script": {
 				"type": "text/javascript",
 				"exec": [

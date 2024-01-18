@@ -24,9 +24,8 @@ import org.mapstruct.Mapping;
 import org.mapstruct.NullValueMappingStrategy;
 
 /**
- * Mapper zwischen Entity-Klassen. Siehe build\generated\sources\annotationProcessor\java\main\...\MannschaftMapperImpl.java.
- *
- * @author <a href="mailto:Juergen.Zimmermann@h-ka.de">Jürgen Zimmermann</a>
+ * Mapper zwischen Entity-Klassen.
+ * Siehe build\generated\sources\annotationProcessor\java\main\...\MannschaftMapperImpl.java.
  */
 @Mapper(nullValueIterableMappingStrategy = NullValueMappingStrategy.RETURN_DEFAULT)
 interface MannschaftMapper {
@@ -64,9 +63,9 @@ interface MannschaftMapper {
     /**
      * Ein DTO-Objekt von MannschaftDTO in ein Objekt für ein zu änderndes Mannschaft-Objekt konvertieren.
      *
-     * @param dto DTO-Objekt für MannschaftUpdateDTO ohne ID, version, erzeugt, aktualisiert, adresse, umsaetze,
+     * @param dto DTO-Objekt für MannschaftUpdateDTO ohne ID, version, erzeugt, aktualisiert, trainer, spielerList,
      *            interesseStr, username
-     * @return Konvertiertes Mannschaft-Objekt mit null als ID, adresse und umsaetze
+     * @return Konvertiertes Mannschaft-Objekt mit null als ID, trainer und spielerList
      */
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "version", ignore = true)

@@ -90,7 +90,8 @@ public class MannschaftReadService {
         if (mannschaft == null) {
             throw new NotFoundException(id);
         }
-        log.debug("findById: mannschaft={}, umsaetze={}", mannschaft, fetchSpielerList ? mannschaft.getSpielerList() : "N/A");
+        log.debug("findById: mannschaft={}, spielerList={}", mannschaft, fetchSpielerList ? mannschaft.getSpielerList()
+            : "N/A");
         return mannschaft;
     }
 

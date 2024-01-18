@@ -20,8 +20,6 @@ import lombok.Getter;
 
 /**
  * Enum für ProblemDetail.type.
- *
- * @author <a href="mailto:Juergen.Zimmermann@h-ka.de">Jürgen Zimmermann</a>
  */
 @Getter
 public enum ProblemType {

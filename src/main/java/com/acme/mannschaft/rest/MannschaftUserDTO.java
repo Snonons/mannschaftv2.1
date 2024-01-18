@@ -21,9 +21,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * ValueObject für einen neuen Mannschaften mit den Benutzerdaten an der REST-Schnittstelle.
  * Beim Lesen wird die Klasse MannschaftModel für die Ausgabe verwendet, d.h. ohne die Benutzerdaten.
- * <img src="../../../../../asciidoc/MannschaftUserDTO.svg" alt="Klassendiagramm">
- *
- * @author <a href="mailto:Juergen.Zimmermann@h-ka.de">Jürgen Zimmermann</a>
  * @param mannschaftDTO Der Mannschaft.
  * @param userDTO Die Benutzerdaten.
  */

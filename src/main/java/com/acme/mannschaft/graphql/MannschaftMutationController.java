@@ -18,15 +18,13 @@ package com.acme.mannschaft.graphql;
 
 import com.acme.mannschaft.entity.Mannschaft;
 import com.acme.mannschaft.service.ConstraintViolationsException;
-import com.acme.mannschaft.service.EmailExistsException;
 import com.acme.mannschaft.service.MannschaftWriteService;
 import graphql.GraphQLError;
 import jakarta.validation.ConstraintViolation;
-import jakarta.validation.Path;
+
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;

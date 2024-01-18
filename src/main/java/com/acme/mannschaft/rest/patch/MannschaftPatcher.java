@@ -27,8 +27,6 @@ import static com.acme.mannschaft.rest.patch.PatchOperationType.REPLACE;
 
 /**
  * Klasse, um PATCH-Operationen auf Mannschaft-Objekte anzuwenden.
- *
- * @author <a href="mailto:Juergen.Zimmermann@h-ka.de">Jürgen Zimmermann</a>
  */
 @Component
 @Slf4j
@@ -57,7 +55,8 @@ public final class MannschaftPatcher {
         replaceOps(mannschaft, replaceOps, uri);
     }
 
-    private void replaceOps(final Mannschaft mannschaft, @NonNull final Iterable<@NonNull PatchOperation> ops, final URI uri) {
+    private void replaceOps
+        (final Mannschaft mannschaft, @NonNull final Iterable<@NonNull PatchOperation> ops, final URI uri) {
         ops.forEach(op -> {
             switch (op.path()) {
                 case "/name" -> mannschaft.setName(op.value());

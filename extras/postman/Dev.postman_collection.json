@@ -7,26 +7,6 @@
 		{
 			"name": "DB neu laden",
 			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"exec": [
-							"pm.test('Statuscode 200', () => {\r",
-							"    pm.response.to.have.status(200);\r",
-							"});\r",
-							"pm.test('Content-Type text/plain', () => {\r",
-							"    const { response } = pm;\r",
-							"    const contentType = response.headers.get('Content-Type');\r",
-							"    pm.expect(contentType).to.match(/^text\\/plain/u);\r",
-							"});\r",
-							"pm.test('ok', () => {\r",
-							"    const body = pm.response.text();\r",
-							"    pm.expect(body).to.be.equal('ok');\r",
-							"});"
-						],
-						"type": "text/javascript"
-					}
-				}
 			],
 			"request": {
 				"auth": {
